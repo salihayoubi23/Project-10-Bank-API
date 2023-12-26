@@ -82,10 +82,11 @@ export default function UserHeader() {
         {!isEditing && `${user.body.firstName} ${user.body.lastName}`}
       </h1>
       {isEditing ? (
-        <div>
+        <div className='boxEdit'>
           {/* Champ de saisie pour le prénom */}
           <input
             type="text"
+            className='inputEdit'
             value={editedFirstName}
             onChange={(e) => {
               setEditedFirstName(e.target.value);
@@ -99,6 +100,7 @@ export default function UserHeader() {
           {/* Champ de saisie pour le nom */}
           <input
             type="text"
+            className='inputEdit'
             value={editedLastName}
             onChange={(e) => {
               setEditedLastName(e.target.value);
@@ -109,14 +111,15 @@ export default function UserHeader() {
           {/* Affichage de l'erreur du nom, le cas échéant */}
           {lastNameError && <span style={{ color: 'red' }}>{lastNameError}</span>}
 
+         <div className='btnEdit'> 
           {/* Boutons Save et Cancel */}
-          <button onClick={handleSave}>Save</button>
-          <button onClick={handleCancel}>Cancel</button>
+          <button className='buttonEdit' onClick={handleSave}>Save</button>
+          <button className='buttonEdit'onClick={handleCancel}>Cancel</button></div>
         </div>
       ) : (
         <div>
           {/* Bouton Edit pour activer le mode édition */}
-          <button onClick={handleEditClick} className="edit-button">
+          <button onClick={handleEditClick} className="">
             Edit Name
           </button>
         </div>
