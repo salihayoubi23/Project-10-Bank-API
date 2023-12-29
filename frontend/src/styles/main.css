@@ -292,8 +292,6 @@ body {
   width: 20%;
   border: hidden;
 
- 
-
 }
 .buttonEdit{
   padding: 10px;
@@ -301,10 +299,10 @@ body {
   width: 15%;
   border-color: #610e81;
   color: #610e81;
-  
-  
-  
+
 }
+
+
 @media (min-width: 720px) {
   .account {
     flex-direction: row;
@@ -317,4 +315,9 @@ body {
   .transaction-button {
     width: 200px;
   }
+}
+
+form.error input {
+  border: 1px solid red;
+  color: red;
 }

@@ -1,16 +1,21 @@
-import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 import { loginUser, fetchUserProfile, setEmail, setPassword, setError } from '../reducer/userSlice';
 import ConnectionFields from './ConnectionFields';
 import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+
 
 // Composant principal pour le formulaire de connexion
 export default function ConnectionForm() {
   const dispatch = useDispatch(); // Utilisation du hook useDispatch pour envoyer des actions Redux
   const navigate = useNavigate(); // Utilisation du hook useNavigate pour la navigation dans l'application
   const { email, password, error, user } = useSelector((state) => state.auth); // Utilisation du hook useSelector pour accéder à l'état Redux
+  const [rememberMe, setRememberMe] = useState(false);
+  
+
+  
 
   // Effet secondaire pour rediriger l'utilisateur s'il est connecté ou en cas d'erreur
   useEffect(() => {
@@ -59,6 +64,10 @@ const handleSubmit = async (e) => {
     handleErrorSet("Erreur lors de la connexion. Veuillez réessayer.");
   }
 };
+// Gestionnaire de changement de "Remember Me"
+const handleRememberMeChange = (e) => {
+  setRememberMe(e.target.checked);
+};
 
   // Rendu du composant
   return (
@@ -73,15 +82,16 @@ const handleSubmit = async (e) => {
             onEmailChange={handleEmailChange}
             password={password}
             onPasswordChange={handlePasswordChange}
-            error={error}
-            onErrorSet={handleErrorSet}
+            rememberMe={rememberMe}
+            onRememberMeChange={handleRememberMeChange}
           />
           <button className="sign-in-button" type="submit">
             Sign In
           </button>
-          {error && <p className="error-message">{error}</p>} {/* Affichage du message d'erreur s'il y en a un */}
+          {error && <p className="error-message">{error}</p>}
         </form>
       </section>
     </main>
   );
 }
+
